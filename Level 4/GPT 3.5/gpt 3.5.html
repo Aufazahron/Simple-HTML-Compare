@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>To-Do List Interaktif</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7f9;
+      color: #333;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bfc;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005bb5;
+    }
+
+    .board {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+
+    .column {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 10px;
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .column h2 {
+      text-align: center;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .task-list {
+      list-style: none;
+      padding: 0;
+      min-height: 100px;
+    }
+
+    .task-list li {
+      background-color: #e9eef4;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: grab;
+    }
+
+    @media (max-width: 768px) {
+      .board {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do List Interaktif</h1>
+    <form id="task-form">
+      <input type="text" id="task-input" placeholder="Tambah tugas baru..." required>
+      <button type="submit">Tambah</button>
+    </form>
+
+    <div class="board">
+      <div class="column">
+        <h2>To Do</h2>
+        <ul id="todo" class="task-list"></ul>
+      </div>
+      <div class="column">
+        <h2>In Progress</h2>
+        <ul id="in-progress" class="task-list"></ul>
+      </div>
+      <div class="column">
+        <h2>Done</h2>
+        <ul id="done" class="task-list"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sortable.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const taskForm = document.getElementById('task-form');
+      const taskInput = document.getElementById('task-input');
+
+      const lists = {
+        'todo': document.getElementById('todo'),
+        'in-progress': document.getElementById('in-progress'),
+        'done': document.getElementById('done')
+      };
+
+      // Load tasks from localStorage
+      function loadTasks() {
+        Object.keys(lists).forEach(key => {
+          const saved = localStorage.getItem(key);
+          if (saved) {
+            lists[key].innerHTML = saved;
+          }
+        });
+      }
+
+      // Save tasks to localStorage
+      function saveTasks() {
+        Object.keys(lists).forEach(key => {
+          localStorage.setItem(key, lists[key].innerHTML);
+        });
+      }
+
+      // Tambah tugas baru
+      taskForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const text = taskInput.value.trim();
+        if (text === '') return;
+
+        const li = document.createElement('li');
+        li.textContent = text;
+        lists['todo'].appendChild(li);
+        taskInput.value = '';
+        saveTasks();
+      });
+
+      // Inisialisasi SortableJS untuk semua kolom
+      Object.values(lists).forEach(list => {
+        Sortable.create(list, {
+          group: 'shared',
+          animation: 150,
+          onEnd: saveTasks
+        });
+      });
+
+      loadTasks();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kelompok Kami</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #fff0f5;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      color: #e75480;
+      margin-bottom: 40px;
+    }
+
+    .ribbon {
+      display: inline-block;
+      position: relative;
+      background: #ff69b4;
+      color: white;
+      font-size: 1.2em;
+      padding: 15px 30px;
+      margin: 15px;
+      cursor: pointer;
+      border-radius: 20px;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .ribbon:hover {
+      background: #ff85c1;
+      transform: scale(1.05);
+    }
+
+    .ribbon::before,
+    .ribbon::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: #ff69b4 transparent transparent transparent;
+    }
+
+    .ribbon::before {
+      left: 10px;
+    }
+
+    .ribbon::after {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Anggota Kelompok Kami 💖</h1>
+
+  <div class="ribbon" onclick="toggleName(this, 'Arya Adimanggala')">Arya</div>
+  <div class="ribbon" onclick="toggleName(this, 'Aulia Aufa Zahron')">Aufa</div>
+  <div class="ribbon" onclick="toggleName(this, 'Kaylla Asyifa')">Kaylla</div>
+  <div class="ribbon" onclick="toggleName(this, 'Kholistiyani Zulfi')">Ari</div>
+  <div class="ribbon" onclick="toggleName(this, 'Nayla Putri Ashfiya')">Nayla</div>
+
+  <script>
+    function toggleName(element, fullName) {
+      const currentName = element.textContent;
+      if (currentName === fullName) {
+        element.textContent = getNickname(fullName);
+      } else {
+        element.textContent = fullName;
+      }
+    }
+
+    function getNickname(fullName) {
+      switch(fullName) {
+        case 'Arya Adimanggala': return 'Arya';
+        case 'Aulia Aufa Zahron': return 'Aufa';
+        case 'Kaylla Asyifa': return 'Kaylla';
+        case 'Kholistiyani Zulfi': return 'Ari';
+        case 'Nayla Putri Ashfiya': return 'Nayla';
+        default: return fullName;
+      }
+    }
+  </script>
+
+</body>
+</html>

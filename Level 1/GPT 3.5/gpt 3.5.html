@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Penugasan Mata Kuliah Semester 2</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #fef6e4, #e0f7fa);
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      color: #ff6f61;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border: 3px dashed #ffb347;
+      border-radius: 20px;
+      width: 250px;
+      padding: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      transition: transform 0.3s, background-color 0.3s;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      background-color: #fce4ec;
+    }
+
+    .card h2 {
+      font-size: 1.2em;
+      color: #4a4a4a;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>📚 Daftar Penugasan Mata Kuliah Semester 2 🎨</h1>
+  <div class="container">
+    <div class="card">
+      <h2>1. Sistem Digital dan Perangkat</h2>
+    </div>
+    <div class="card">
+      <h2>2. Bahasa Inggris</h2>
+    </div>
+    <div class="card">
+      <h2>3. Kinematika dan Dinamika Teknik</h2>
+    </div>
+    <div class="card">
+      <h2>4. Landasan Pendidikan</h2>
+    </div>
+    <div class="card">
+      <h2>5. Pendidikan Kewarganegaraan</h2>
+    </div>
+    <div class="card">
+      <h2>6. Pendidikan Indonesia</h2>
+    </div>
+    <div class="card">
+      <h2>7. Literasi Digital</h2>
+    </div>
+  </div>
+
+  <script>
+    // Interaktivitas opsional: Alert ketika card diklik
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        alert(`Kamu mengklik mata kuliah: ${card.innerText}`);
+      });
+    });
+  </script>
+</body>
+</html>
